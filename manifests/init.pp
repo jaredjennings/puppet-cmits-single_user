@@ -23,7 +23,7 @@
 
 class single_user {
     case $osfamily {
-        RedHat: {
+        'RedHat': {
             case $operatingsystemrelease {
                 /^6.*/: {
                     include single_user::rhel6
@@ -31,14 +31,14 @@ class single_user {
                 /^5.*/: {
                     include single_user::rhel5
                 }
-                default: { unimplemented() }
+                default: { fail "unimplemented on ${::osfamily} ${::operatingsystemrelease}" }
             }
         }
 # \doneby{admins}{iacontrol}{DCSS-1}%
 # Under Mac OS X, single-user mode access is controlled by a boot
 # password, which must be set from a utility which is run from the Mac
 # OS X install disk. This cannot be automated.
-        Darwin: {}
-        default: { unimplemented() }
+        'Darwin': {}
+        default: { fail "unimplemented on ${::osfamily}" }
     }
 }
